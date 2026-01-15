@@ -103,5 +103,5 @@ stages:
       size: 87
     - path: src/model/register_model.py
       hash: md5
-      md5: 79b2ad47909a81a7f451addd10ab58f5
-      size: 2427
+      md5: aa9710ce049b3aabf3e359da1e117262
+      size: 2400

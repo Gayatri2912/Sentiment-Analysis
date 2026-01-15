@@ -1,119 +1,36 @@
-# End-to-end-Youtube-Sentiment
+### Sentiment Analysis
+1. ⚙️ Modular Pipeline Architecture (DVC)
+You transitioned from individual notebooks to a structured DVC (Data Version Control) pipeline. Each step of your project is now a "stage" defined in a dvc.yaml file.
 
+📥 Data Ingestion: Automatically handles the collection of raw YouTube comment data.
 
-conda create -n youtube python=3.11 -y
+🧹 Preprocessing: Standardizes text cleaning and converts comments into mathematical features using TF-IDF.
 
-conda activate youtube
+🧠 Model Building: Trains a LightGBM classifier specifically tuned for sentiment detection.
 
-pip install -r requirements.txt
+📊 Model Evaluation: Calculates accuracy and generates confusion matrices to visualize errors.
 
+2. 🧪 Experiment Tracking & Registry (MLflow)
+You integrated MLflow to move beyond local logging and manage the model lifecycle.
 
-## DVC
+🌐 Remote Tracking: You deployed an MLflow server on an AWS EC2 instance, allowing you to log every run to a central dashboard.
 
-dvc init
+📈 Metric Logging: The system captures training parameters and performance metrics for every single run.
 
-dvc repro
+🗃️ Model Registry: You implemented a system to "Register" successful models, versioning them (e.g., Version 1, Version 2) to track the best-performing weights.
 
-dvc dag
+3. ☁️ Cloud Artifact Management (AWS S3)
+Because ML models are too large for GitHub, you implemented a scalable cloud storage solution.
 
+🪣 AWS S3 Integration: You configured a bucket (bucket-mlflow-92) to act as your "Remote Storage".
 
+🔗 Artifact Decoupling: Large .pkl files are pushed to S3, while only small metadata "pointers" stay in Git, keeping your repo light.
 
-## AWS
+🔐 IAM Security: You managed AWS IAM policies to ensure secure, authorized access to your cloud data.
 
-aws configure
+4. 🐳 Containerization & CI/CD
+To ensure your project works on any machine, you adopted modern deployment standards.
 
+📦 Dockerization: You created a Dockerfile that packages your code and dependencies into a single container, eliminating environment errors.
 
-
-### Json data demo in postman
-
-http://localhost:5000/predict
-
-```python
-{
-    "comments": ["This video is awsome! I loved a lot", "Very bad explanation. poor video"]
-}
-```
-
-
-
-chrome://extensions
-
-
-## how to get youtube api key from gcp:
-
-https://www.youtube.com/watch?v=i_FdiQMwKiw
-
-
-
-# AWS-CICD-Deployment-with-Github-Actions
-
-## 1. Login to AWS console.
-
-## 2. Create IAM user for deployment
-
-	#with specific access
-
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
-
-
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/youtube
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-    AWS_ACCESS_KEY_ID=
-
-    AWS_SECRET_ACCESS_KEY=
-
-    AWS_REGION = us-east-1
-
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
-
-    ECR_REPOSITORY_NAME = simple-app
+🤖 GitHub Actions: You set up CI/CD to automatically verify your code and run the pipeline every time you commit new work.

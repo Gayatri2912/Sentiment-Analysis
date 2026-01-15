@@ -1,0 +1,22 @@
+artifact_path: file:c:/Users/kaila/Desktop/youtube sentiment analysis/End-to-end-Youtube-Sentiment-main/notebooks/mlruns/1/models/m-c2248f07505e4426b4bcc2295f2d7c3a/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.11
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 3.8.1
+model_id: m-c2248f07505e4426b4bcc2295f2d7c3a
+model_size_bytes: 9215069
+model_uuid: m-c2248f07505e4426b4bcc2295f2d7c3a
+prompts: null
+run_id: 5fb48ac618c94eda80d8595c6bec9f33
+utc_time_created: '2026-01-14 15:09:45.214395'
